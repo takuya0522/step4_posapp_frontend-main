@@ -8,25 +8,28 @@
     ],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": false,
+    "strict": true, // falseからtrueに変更
+    "forceConsistentCasingInFileNames": true, // 追加
     "noEmit": true,
     "incremental": true,
     "module": "esnext",
-    "esModuleInterop": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
-    }
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "esModuleInterop": true
   },
   "include": [
     "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-, "../_app.tsx"  ],
+    "src/**/*.ts", // パスを修正
+    "src/**/*.tsx" // パスを修正
+  ],
   "exclude": [
     "node_modules"
   ]
