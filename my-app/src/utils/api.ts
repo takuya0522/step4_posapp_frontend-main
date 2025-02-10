@@ -1,4 +1,5 @@
-const baseURL = 'https://tech0-gen8-step4-pos-app-86.azurewebsites.net/api';
+// 環境変数からAPIのベースURLを取得
+const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
 export interface APIError {
   error: string;
