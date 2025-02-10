@@ -54,7 +54,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     environment:
-      name: 'Production'
+      name: 'production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     
     steps:
@@ -71,6 +71,6 @@ jobs:
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'tech0-gen8-step4-pos-app-85'
-          slot-name: 'Production'
+          slot-name: 'production'
           package: ./deploy
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0B66414F86844605AF037EF2B1BA2D4E }}
