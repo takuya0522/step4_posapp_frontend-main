@@ -18,13 +18,21 @@ export default function Home() {
       console.log('Searching for product:', code); // デバッグログ
       const product = await searchProduct(code);
       console.log('Product found:', product); // デバッグログ
-      setCurrentProduct(product);
+      if (!product) {
+        setCurrentProduct({
+          code: code,
+          name: '商品が見つかりませんでした',
+          price: 0  // nullの代わりに0を使用
+        });
+      } else {
+        setCurrentProduct(product);
+      }
     } catch (error) {
       console.error('Error fetching product:', error);
       setCurrentProduct({
         code: code,
         name: '商品が見つかりませんでした',
-        price: null
+        price: 0  // nullの代わりに0を使用
       });
     }
   };
@@ -41,9 +49,9 @@ export default function Home() {
 
       // 商品情報を正しい形式に変換
       const items = purchaseItems.map(item => ({
-        code: item.code || item.CODE,  // 小文字/大文字の両方に対応
-        name: item.name || item.NAME,  // 小文字/大文字の両方に対応
-        price: item.price || item.PRICE // 小文字/大文字の両方に対応
+        code: item.code,
+        name: item.name,
+        price: item.price
       }));
 
       console.log('Formatted items:', items); // デバッグ用
