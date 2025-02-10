@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://127.0.0.1:8000/api';
+const baseURL = 'https://tech0-gen8-step4-pos-app-86.azurewebsites.net/api';
 
 export interface APIError {
   error: string;
@@ -30,7 +30,7 @@ export interface TransactionRequest {
 // 商品マスタ検索API
 export const searchProduct = async (code: string): Promise<Product> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/products?code=${code}`);
+    const response = await fetch(`${baseURL}/products?code=${code}`);
     if (!response.ok) {
       throw new Error('商品検索に失敗しました');
     }
@@ -62,7 +62,7 @@ export const handlePurchase = async (items: PurchaseItem[]): Promise<any> => {
 
     console.log('Request body:', JSON.stringify(requestBody)); // デバッグ用
 
-    const response = await fetch(`${API_BASE_URL}/transactions`, {
+    const response = await fetch(`${baseURL}/transactions`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ export const handlePurchase = async (items: PurchaseItem[]): Promise<any> => {
 };
 
 export const createTransaction = async (items: TransactionItem[]): Promise<void> => {
-  const response = await fetch(`${API_BASE_URL}/api/transactions`, {
+  const response = await fetch(`${baseURL}/api/transactions`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -95,4 +95,8 @@ export const createTransaction = async (items: TransactionItem[]): Promise<void>
   if (!response.ok) {
     throw new Error('取引の作成に失敗しました');
   }
+};
+
+export const purchaseProducts = async (items: PurchaseItem[]) => {
+  // ... existing code ...
 }; 
