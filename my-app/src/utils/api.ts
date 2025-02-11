@@ -31,7 +31,11 @@ export interface TransactionRequest {
 // 商品マスタ検索API
 export const searchProduct = async (code: string): Promise<Product> => {
   try {
-    const response = await fetch(`${baseURL}/products?code=${code}`);
+    const url = `${baseURL}/api/products?code=${code}`;
+    console.log('Request URL:', url);  // デバッグ用
+    console.log('Base URL:', baseURL); // デバッグ用
+
+    const response = await fetch(url);
     if (!response.ok) {
       throw new Error('商品検索に失敗しました');
     }
@@ -51,7 +55,7 @@ interface PurchaseItem {
 // 購入処理API
 export const handlePurchase = async (items: PurchaseItem[]): Promise<any> => {
   try {
-    console.log('Sending request with items:', items); // デバッグ用
+    console.log('Sending request with items:', items);
 
     const requestBody = {
       items: items.map(item => ({
@@ -61,9 +65,10 @@ export const handlePurchase = async (items: PurchaseItem[]): Promise<any> => {
       }))
     };
 
-    console.log('Request body:', JSON.stringify(requestBody)); // デバッグ用
+    console.log('Request URL:', `${baseURL}/api/transactions`); // デバッグ用
+    console.log('Request body:', JSON.stringify(requestBody));
 
-    const response = await fetch(`${baseURL}/transactions`, {
+    const response = await fetch(`${baseURL}/api/transactions`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -73,7 +78,7 @@ export const handlePurchase = async (items: PurchaseItem[]): Promise<any> => {
 
     if (!response.ok) {
       const errorData = await response.json();
-      console.error('API Error response:', errorData); // デバッグ用
+      console.error('API Error response:', errorData);
       throw new Error(errorData.detail || '購入処理に失敗しました');
     }
 
