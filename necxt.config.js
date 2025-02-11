@@ -1,13 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-  env: {
-    NEXT_PUBLIC_BASE_URL: 'https://tech0-gen8-step4-pos-app-85.azurewebsites.net',
-    NEXT_PUBLIC_API_URL: 'https://tech0-gen8-step4-pos-app-86.azurewebsites.net/api'
+  output: 'standalone',
+  typescript: {
+    ignoreBuildErrors: false
   },
-    // 以下を追加
-    output: 'standalone',
-    poweredByHeader: false
-}
+  reactStrictMode: true,
+  // pagesディレクトリの代わりにsrcディレクトリを使用することを明示
+  pageExtensions: ['ts', 'tsx', 'js', 'jsx'],
+  experimental: {
+    appDir: true
+  }
+};
 
-module.exports = nextConfig 
+module.exports = nextConfig;
